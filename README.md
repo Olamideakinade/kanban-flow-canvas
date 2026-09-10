@@ -8,23 +8,28 @@
 
 > **Live Demo Available:** Test and play this project live right now: **[https://olamideakinade.github.io/kanban-flow-canvas/](https://olamideakinade.github.io/kanban-flow-canvas/)**
 
-## Features in v1.1.0
-- **Drag and Drop:** Effortlessly move tasks across To Do, In Progress, and Done columns.
-- **Search & Filter:** Real-time text search and priority filtering.
-- **Persistence:** Automatic synchronization with local storage.
-- **Import / Export:** Backup and restore your workflow state via JSON files.
-- **Keyboard Shortcuts:** Fast actions for power users.
+## Overview
+
+Kanban Flow Canvas is a high-performance, responsive HTML5/Vanilla JavaScript interactive task management application. Built with zero external framework dependencies, it offers fluid drag-and-drop workflows, local storage persistence, JSON backup/restore capabilities, and a distraction-free dark UI.
+
+## Features
+
+- **Interactive Kanban Board**: Dynamic columns for Todo, In Progress, and Done.
+- **Drag and Drop**: Native HTML5 drag and drop with instant visual feedback and state synchronization.
+- **Live Search & Filtering**: Instant query filtering by title/description and priority level.
+- **Metrics Dashboard**: Real-time progress tracking, completion statistics, and priority breakdown.
+- **Keyboard Shortcuts**: Power-user navigation (`N` for new task, `/` for search, `E` for export).
+- **Persistent Storage**: Local storage synchronization with fallback handling.
 
 ## Getting Started
 
-Clone the repository and open `index.html` in any modern web browser.
+Clone the repository and open `index.html` in any modern web browser:
 
 ```bash
 git clone https://github.com/Olamideakinade/kanban-flow-canvas.git
 cd kanban-flow-canvas
-# Open index.html in browser
 ```
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+Distributed under the MIT License. See `LICENSE` for more information.
