@@ -6,36 +6,25 @@
 
 ![Project Snapshot](preview.svg)
 
-> 🚀 **Live Demo Available:** Test and play this project live right now: **[https://olamideakinade.github.io/kanban-flow-canvas/](https://olamideakinade.github.io/kanban-flow-canvas/)**
+> **Live Demo Available:** Test and play this project live right now: **[https://olamideakinade.github.io/kanban-flow-canvas/](https://olamideakinade.github.io/kanban-flow-canvas/)**
 
-Kanban Flow Canvas is a lightweight, zero-dependency project management workspace designed for speed and local data sovereignty. It uses standard DOM APIs and HTML5 Canvas rendering for performance-critical swimlanes, storing state locally via `localStorage`.
+## Features in v1.1.0
+- **Drag and Drop:** Effortlessly move tasks across To Do, In Progress, and Done columns.
+- **Search & Filter:** Real-time text search and priority filtering.
+- **Persistence:** Automatic synchronization with local storage.
+- **Import / Export:** Backup and restore your workflow state via JSON files.
+- **Keyboard Shortcuts:** Fast actions for power users.
 
-## Key Capabilities
+## Getting Started
 
-- **Zero-Dependency Runtime**: Written in vanilla JavaScript with no external framework overhead or heavy build chains.
-- **Local Persistence**: Automatic state serialization to `localStorage` with JSON export/import utilities for backup.
-- **Keyboard Driven**: Full keyboard navigation shortcuts for rapid task creation, movement, and status updates.
-- **Adaptive Layout**: Responsive grid layout adapting cleanly from desktop viewports down to tablet displays.
-
-## Quickstart
-
-Clone the repository and serve the root directory using any standard static file server:
+Clone the repository and open `index.html` in any modern web browser.
 
 ```bash
 git clone https://github.com/Olamideakinade/kanban-flow-canvas.git
 cd kanban-flow-canvas
-python3 -m http.server 8080
+# Open index.html in browser
 ```
-
-Open `http://localhost:8080` in your browser.
-
-## Architecture & Design
-
-- `index.html`: Semantic DOM structure defining the application shell, toolbar, and board layout.
-- `style.css`: Clean, professional interface styling utilizing a restrained color palette, CSS variables, and native system typography.
-- `app.js`: State machine, event listeners, drag-and-drop controller, and persistence layer.
-- `.gitignore`: Excludes local development artifacts and OS-specific metadata files.
 
 ## License
 
-MIT
+MIT License. See [LICENSE](LICENSE) for details.
