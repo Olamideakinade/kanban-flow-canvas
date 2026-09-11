@@ -3,111 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban Flow Canvas v1.2.0</title>
+    <title>Kanban Flow Canvas v1.3.0</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="app-header">
         <div class="brand">
             <h1>Kanban Flow</h1>
-            <span class="badge">v1.2.0</span>
+            <span class="badge">v1.3.0</span>
         </div>
         <div class="toolbar">
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" class="search-input" placeholder="Search tasks... (/)">
+            </div>
+            <select id="priority-filter" class="filter-select">
+                <option value="all">All Priorities</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+            </select>
             <button id="add-task-btn" class="btn btn-primary">+ New Task</button>
-            <button id="export-btn" class="btn btn-secondary">Export JSON</button>
-            <button id="import-btn" class="btn btn-secondary">Import JSON</button>
-            <input type="file" id="import-file" accept=".json" style="display: none;">
+            <button id="export-btn" class="btn btn-secondary" title="Export JSON (E)">Export</button>
+            <label class="btn btn-secondary" title="Import JSON">
+                Import <input type="file" id="import-file" accept=".json" style="display: none;">
+            </label>
+            <button id="reset-btn" class="btn btn-danger">Reset</button>
         </div>
     </header>
 
-    <section class="dashboard-hud">
-        <div class="stats-group">
-            <div class="stat-item">
-                <span class="stat-label">Total Tasks</span>
-                <span id="stat-total" class="stat-value">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Completed</span>
-                <span id="stat-completed" class="stat-value">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Urgent</span>
-                <span id="stat-urgent" class="stat-value">0</span>
-            </div>
+    <div class="metrics-bar">
+        <div class="metric-item">
+            <span>Total Tasks:</span>
+            <span id="metric-total" class="metric-value">0</span>
         </div>
-        <div class="progress-container" title="Completion Progress">
-            <div id="progress-bar" class="progress-bar"></div>
+        <div class="metric-item">
+            <span>Completed:</span>
+            <span id="metric-completed" class="metric-value">0%</span>
         </div>
-    </section>
-
-    <div class="filter-bar">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Search tasks... (/)">
+        <div class="metric-item">
+            <span>Urgent (High):</span>
+            <span id="metric-urgent" class="metric-value">0</span>
         </div>
-        <select id="priority-filter" class="filter-select">
-            <option value="all">All Priorities</option>
-            <option value="high">High Priority</option>
-            <option value="medium">Medium Priority</option>
-            <option value="low">Low Priority</option>
-        </select>
     </div>
 
-    <main class="kanban-board" id="kanban-board">
+    <main class="kanban-board">
         <section class="kanban-column" data-status="todo">
             <div class="column-header">
-                <span>To Do</span>
-                <span id="count-todo" class="badge">0</span>
+                <div class="column-title-group">
+                    <h2 class="column-title">Todo</h2>
+                    <span class="column-count" id="count-todo">0</span>
+                </div>
             </div>
-            <div class="column-tasks" id="tasks-todo"></div>
+            <div class="column-body" id="column-todo"></div>
         </section>
 
         <section class="kanban-column" data-status="in-progress">
             <div class="column-header">
-                <span>In Progress</span>
-                <span id="count-in-progress" class="badge">0</span>
+                <div class="column-title-group">
+                    <h2 class="column-title">In Progress</h2>
+                    <span class="column-count" id="count-in-progress">0</span>
+                </div>
             </div>
-            <div class="column-tasks" id="tasks-in-progress"></div>
+            <div class="column-body" id="column-in-progress"></div>
         </section>
 
         <section class="kanban-column" data-status="done">
             <div class="column-header">
-                <span>Done</span>
-                <span id="count-done" class="badge">0</span>
+                <div class="column-title-group">
+                    <h2 class="column-title">Done</h2>
+                    <span class="column-count" id="count-done">0</span>
+                </div>
             </div>
-            <div class="column-tasks" id="tasks-done"></div>
+            <div class="column-body" id="column-done"></div>
         </section>
     </main>
 
-    <div id="task-modal" class="modal-overlay">
+    <div id="task-modal" class="modal">
         <div class="modal-content">
-            <h3 id="modal-title">Create New Task</h3>
+            <div class="modal-header">
+                <h2 id="modal-title">Create New Task</h2>
+                <button class="close-modal" id="close-modal-btn">&times;</button>
+            </div>
             <form id="task-form">
+                <input type="hidden" id="task-id">
                 <div class="form-group">
                     <label for="task-title-input">Title</label>
-                    <input type="text" id="task-title-input" required placeholder="Task title...">
+                    <input type="text" id="task-title-input" class="form-control" required placeholder="Enter task title...">
                 </div>
                 <div class="form-group">
                     <label for="task-desc-input">Description</label>
-                    <textarea id="task-desc-input" rows="3" placeholder="Detailed task notes..."></textarea>
+                    <textarea id="task-desc-input" class="form-control" placeholder="Enter task details..."></textarea>
                 </div>
                 <div class="form-group">
                     <label for="task-priority-input">Priority</label>
-                    <select id="task-priority-input">
+                    <select id="task-priority-input" class="form-control">
                         <option value="low">Low</option>
-                        <option value="medium">Medium</option>
+                        <option value="medium" selected>Medium</option>
                         <option value="high">High</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="task-status-input">Status</label>
-                    <select id="task-status-input">
-                        <option value="todo">To Do</option>
-                        <option value="in-progress">In Progress</option>
-                        <option value="done">Done</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" id="cancel-modal" class="btn btn-secondary">Cancel</button>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-modal-btn" class="btn btn-secondary">Cancel</button>
                     <button type="submit" class="btn btn-primary">Save Task</button>
                 </div>
             </form>
